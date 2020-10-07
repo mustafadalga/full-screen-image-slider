@@ -3,15 +3,17 @@ var arrow_left=container.querySelector('#arrow-left');
 var arrow_right=container.querySelector('#arrow-right');
 var slide=document.querySelectorAll('.slide');
 var slideIndex=0;
-
-
-
+var durationSliderInterval= setInterval(nextSlide, 6000);
 
 
 function resetActive(){
     slide.forEach(item=>{
         item.classList.remove("active");
-    })
+    });
+}
+function resetInterval(){
+    clearInterval(durationSliderInterval)
+    durationSliderInterval= setInterval(nextSlide, 6000);
 }
 function changeSlide(){
     resetActive();
@@ -27,16 +29,13 @@ function previousSlide(){
 }
 
 arrow_left.addEventListener('click',()=>{
+    resetInterval();
     previousSlide();
 });
 
 arrow_right.addEventListener('click',()=>{
-        nextSlide();
+     resetInterval();
+     nextSlide();
 });
-function durationSlider(){
-    setInterval(()=>{
-        nextSlide();
-    },5000)
-}
 
-durationSlider();
+
